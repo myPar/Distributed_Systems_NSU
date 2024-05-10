@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  manager:
+    working_dir: ./Manager/
+    build:
+      context: ./Manager/
+      args:
+        - JAR_FILE=./Manager/build/libs/*.jar
+
+    container_name: ds_lab1_manager
+    ports: 
+      - 8080:8080
+    depends_on:
+      - worker
+  worker:
+    working_dir: ./Worker/
+    build:
+      context: ./Worker/
+      args:
+        - JAR_FILE=./Worker/build/libs/*.jar
+    container_name: ds_lab1_worker
+    ports: 
+      - 5050-5090
+    
